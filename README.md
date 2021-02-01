@@ -3,16 +3,16 @@ A dashboard to display various statistics about the members and projects of Luna
 
 
 ## Resource
-- Github => Version Control
+- [Github](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api) => Version Control
 - Jibble => Platform to clock in/out
-- Slack => Communication platform
-Add link of API resources
+- [Slack](https://api.slack.com/apis/connections/events-api) => Communication platform
 
 ## Technologies
-someone pull and fill this segment
+- Frontend => Angular
+- Backend => Node.js
+- Database => MongoDB
 
 ## Team Members
-
 Name|Role
 ----|----
 G Diaz|Architect
@@ -20,6 +20,7 @@ Nikki|...
 Santos|...
 Leroy|...
 Min|...
+Spencer|...
 
 ## What MVP is?
 
