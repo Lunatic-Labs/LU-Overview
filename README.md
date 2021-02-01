@@ -8,9 +8,9 @@ A dashboard to display various statistics about the members and projects of Luna
 - [Slack](https://api.slack.com/apis/connections/events-api) => Communication platform
 
 ## Technologies
-Frontend => Angular
-Backend => Node.js
-Database => MongoDB
+- Frontend => Angular
+- Backend => Node.js
+- Database => MongoDB
 
 ## Team Members
 Name|Role
