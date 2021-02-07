@@ -1,11 +1,17 @@
 # LU-Overview
 A dashboard to display various statistics about the members and projects of Lunatic Labs
 
-
 ## Resource
+#### APIs
 - [Github](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api) => Version Control
 - Jibble => Platform to clock in/out
 - [Slack](https://api.slack.com/apis/connections/events-api) => Communication platform
+
+#### Tools
+- [Nest](https://docs.nestjs.com/)
+- [Nest CLI](https://docs.nestjs.com/cli/overview)
+- [Angular](https://angular.io/docs)
+- [Angular CLI](https://angular.io/cli)
 
 ## Technologies
 - Frontend => Angular
@@ -45,16 +51,23 @@ Add a description of what mvp means for this product.
 
 1. Follow the instructions to install an node version manager for [Windows](https://github.com/coreybutler/nvm-windows) or [Mac/Linux](https://github.com/nvm-sh/nvm).
 2. Run 
-```sh
-nvm install 14.15.4
-nvm use 14.15.4
-``` 
-Nvm for windows will not automatically switch versions
+	```sh
+	nvm install 14.15.4
+	nvm use 14.15.4
+	``` 
+	Nvm for windows will not automatically switch versions
 3. Run 
-```sh
-npm install -g @nestjs/cli
-npm install -g @angular/cli
-```
+	```sh
+	npm install -g @nestjs/cli
+	npm install -g @angular/cli
+	```
 4. Clone the project and `cd` into it
 5. `cd` into `server/` and run `npm install`, then do the same for `client/`
 
+# Running
+
+Angular: Navigate to `client/`, then run `ng serve`. Open <http://localhost:4200/>
+
+Nest: Navigate to `server/`, then run `npm run start:dev`. Open <http://localhost:3000/>
+
+Both of the apps will automatically reload if you change any of the source files.
