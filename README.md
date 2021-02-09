@@ -71,4 +71,3 @@ Angular: Navigate to `client/`, then run `ng serve`. Open <http://localhost:4200
 Nest: Navigate to `server/`, then run `npm run start:dev`. Open <http://localhost:3000/>
 
 Both of the apps will automatically reload if you change any of the source files.
-## PR test (to be removed)
