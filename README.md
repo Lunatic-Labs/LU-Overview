@@ -61,8 +61,8 @@ Add a description of what mvp means for this product.
 	npm install -g @nestjs/cli
 	npm install -g @angular/cli
 	```
-4. Clone the project and `cd` into it
-5. `cd` into `server/` and run `npm install`, then do the same for `client/`
+4. Clone the project
+5. Navigate to the `server/` folder in the project and run `npm install`, then do the same for the `client/` folder.
 
 # Running
 
