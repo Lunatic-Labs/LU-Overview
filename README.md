@@ -12,6 +12,7 @@ A dashboard to display various statistics about the members and projects of Luna
 - [Nest CLI](https://docs.nestjs.com/cli/overview)
 - [Angular](https://angular.io/docs)
 - [Angular CLI](https://angular.io/cli)
+- [Angular Material](https://material.angular.io/)
 
 ## Technologies
 - Frontend => Angular
