@@ -8,10 +8,10 @@ export class GithubController {
 	@Get("commits/:repo")
 	async commitsRepo(@Param() params) { //right now just get raw commits and send it
 		return await this.githubService.getCommits({repo: parseInt(params.repo)});
-	}
+	} //test http://localhost:3000/github/commits/2
 
 	@Get("commits/:repo/:user")
-	async commitsRepoUser(@Param() params) {
+	async commitsRepoUser(@Param() params) { //right now just get raw commits and send it
 		return await this.githubService.getCommits({repo: parseInt(params.repo), author: params.user});
-	}
+	} //test http://localhost:3000/github/commits/2/psypersky
 }
