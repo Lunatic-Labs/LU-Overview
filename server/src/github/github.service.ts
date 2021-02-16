@@ -1,11 +1,9 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CommitConfig, GithubLink } from './github.interface';
 var github = require("octonode");
 
 @Injectable()
 export class GithubService {
-	constructor(private readonly httpService: HttpService) { }
-
 	testDatabase = {
 		repo: {
 			1: "spencer012/Game-8",
@@ -27,7 +25,7 @@ export class GithubService {
 		let repo = this.client.repo(this.testDatabase.repo[config.repo]);
 		let responseData = await repo.commitsAsync(commitOptions); //get first page
 		//console.log(responseData);
-		let commits: Array<object> = responseData[0];
+		let commits: Array<any> = responseData[0];
 
 		if (responseData[1].link) { //if it has pagination
 			let parsedLink = this.parseGithubLink(responseData[1].link);
@@ -53,7 +51,7 @@ export class GithubService {
 		while ((res = regex.exec(links)) != null) { //go through the entire string
 			linksParsed[res.groups.rel] = { url: res.groups.link, page: parseInt(res.groups.page) };
 		}
-
+		
 		return linksParsed;
 	}
 }
