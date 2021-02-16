@@ -23,12 +23,11 @@ export class GithubService {
 		}
 		
 		let repo = this.client.repo(this.testDatabase.repo[config.repo]);
-		let responseData = await repo.commitsAsync(commitOptions); //get first page
+		let [commits, headers]: [commits: Array<any>, headers: any] = await repo.commitsAsync(commitOptions); //get first page
 		//console.log(responseData);
-		let commits: Array<any> = responseData[0];
 
-		if (responseData[1].link) { //if it has pagination
-			let parsedLink = this.parseGithubLink(responseData[1].link);
+		if (headers.link) { //if it has pagination
+			let parsedLink = this.parseGithubLink(headers.link);
 			for (let page = 2; page <= Math.min(parsedLink.last.page, 10); page++) {
 				commitOptions.page = page;
 				commits = commits.concat((await repo.commitsAsync(commitOptions))[0]); //join all commits together
