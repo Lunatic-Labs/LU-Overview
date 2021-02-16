@@ -11,7 +11,7 @@ export class GithubController {
 	}
 
 	@Get("commits/:repo/:user")
-	commitsRepoUser(@Param() params) {
-		return "";
+	async commitsRepoUser(@Param() params) {
+		return await this.githubService.getCommits({repo: parseInt(params.repo), author: params.user});
 	}
 }

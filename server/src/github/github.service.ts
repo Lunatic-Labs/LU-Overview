@@ -16,17 +16,24 @@ export class GithubService {
 	client = github.client();
 
 	/*
-		returns all commits from the repo specified by the id
+		returns all commits from the repo specified by the id, optionally by author
 	*/
-	async getCommits(config: CommitConfig): Promise<Array<object>> { 
+	async getCommits(config: CommitConfig): Promise<Array<object>> {
+		let commitOptions: {per_page, page, author?} = { per_page: 100, page: 1 };
+		if (config.author) { 
+			commitOptions.author = config.author;
+		}
+		
 		let repo = this.client.repo(this.testDatabase.repo[config.repo]);
-		let responseData = await repo.commitsAsync({ per_page: 100 }); //gets first page
-		let commits:Array<object> = responseData[0];
+		let responseData = await repo.commitsAsync(commitOptions); //get first page
+		//console.log(responseData);
+		let commits: Array<object> = responseData[0];
 
 		if (responseData[1].link) { //if it has pagination
 			let parsedLink = this.parseGithubLink(responseData[1].link);
 			for (let page = 2; page <= Math.min(parsedLink.last.page, 10); page++) {
-				commits = commits.concat((await repo.commitsAsync({ per_page: 100, page: page}))[0]); //join all commits together
+				commitOptions.page = page;
+				commits = commits.concat((await repo.commitsAsync(commitOptions))[0]); //join all commits together
 			}
 		}
 
@@ -44,9 +51,9 @@ export class GithubService {
 		let regex = /<(?<link>.*?&page=(?<page>\d*).*?)>.*?rel="(?<rel>.*?)"/ig; //https://regex101.com/r/VOY8zh/2
 
 		while ((res = regex.exec(links)) != null) { //go through the entire string
-			linksParsed[res.groups.rel] = {url: res.groups.link, page: parseInt(res.groups.page)};
+			linksParsed[res.groups.rel] = { url: res.groups.link, page: parseInt(res.groups.page) };
 		}
-		
+
 		return linksParsed;
 	}
 }

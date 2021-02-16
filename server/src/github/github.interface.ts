@@ -1,6 +1,6 @@
 export type CommitConfig = {
 	repo: number,
-	user?: string,
+	author?: string,
 	since?: Date,
 	until?: Date
 };
