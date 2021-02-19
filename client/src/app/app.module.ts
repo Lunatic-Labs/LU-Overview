@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatExpansionModule} from '@angular/material/expansion';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,
