@@ -1,7 +1,7 @@
 # LU-Overview
 A dashboard to display various statistics about the members and projects of Lunatic Labs
 
-## Resource
+## Resources
 #### APIs
 - [Github](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api) => Version Control
 - Jibble => Platform to clock in/out
@@ -51,6 +51,6 @@ Both of the apps will automatically reload if you change any of the source files
 
 To run tests:
 
-Angular: Navigate to `server/`, then run `npm run test`
+Angular: Navigate to `client/`, then run `npm run test`
 
 Nest: Navigate to `server/`, then run `npm run test`
