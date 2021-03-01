@@ -1,1 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+	background-color: darkgrey;
+}
+
+#sidebar { /* Making the sidebar static on the left side */
+	background-color: lightgray;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 150px;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+/* ========================= Style definitions for the sidebar ========================= */
+#sidebar h2 {
+	text-align: center;
+	display: block;
+}
+
+/* Style definitions for the links */
+#sidebar a {
+	margin: 0 0 0 5px;
+	padding: 1px 0 1px 4px;
+	display: block;
+	font-size: 15px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	background-color: white;
+
+	text-decoration: none;
+	color: black;
+	margin-bottom: 4px;
+}
+#sidebar a::after {
+	content: "\a";
+    white-space: pre;
+}
+#sidebar a:hover {
+	background-color: darkgrey;
+}
+
+/* Style definitions for sidebar dropdowns, meant to go with material expansion panel */
+#sidebar-dropdowns {
+	background-color: #c2c2c2;
+}
+#sidebar-dropdowns p {
+	margin: 0 0 0 5px;
+	padding: 1px 0 1px 4px;
+	display: block;
+	font-size: 15px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+#sidebar-dropdowns p:last-child {
+	margin: 0 0 5px 5px;
+}
+#sidebar p:hover {
+	background-color: darkgrey;
+}
+
+/* Style definitions for material expansion panel */
+#sidebar-dropdowns mat-expansion-panel {
+	margin: 0 0 4px 5px;
+	box-shadow: none;
+}
+#sidebar-dropdowns mat-expansion-panel-header {
+	padding: 0 8px 0 4px;
+	height: 25px;
+}
+#sidebar-dropdowns .mat-expansion-panel-body {
+	padding: 0;
+}
+#sidebar-dropdowns mat-accordion mat-expansion-panel:last-of-type {
+	border-bottom-right-radius: 0;
+}
+#sidebar-dropdowns mat-accordion mat-expansion-panel:first-of-type {
+	border-top-right-radius: 0;
+}
+#sidebar-dropdowns mat-expansion-panel {
+	background: white;
+}
+#sidebar-dropdowns mat-expansion-panel>*>*>*>mat-expansion-panel {
+	background: rgb(238, 238, 238);
+}
+
+/* ========================= Style definitions for dashboard ========================= */
+#dashboard {
+	margin-left: 150px;
+	padding: 0px 10px;
+}
+
+
+/* Generated */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
