@@ -54,3 +54,13 @@ To run tests:
 Angular: Navigate to `client/`, then run `npm run test`
 
 Nest: Navigate to `server/`, then run `npm run test`
+
+# Documentation
+
+## Server
+
+### Github
+
+#### Commits
+/github/commits/{id}/{user}
+Returns all commits from the repo specified by the id, optionally by author, limited to 1000.
