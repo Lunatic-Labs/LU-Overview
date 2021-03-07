@@ -3,9 +3,9 @@ A dashboard to display various statistics about the members and projects of Luna
 
 ## Resources
 #### APIs
-- [Github](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api) => Version Control
-- Jibble => Platform to clock in/out
-- [Slack](https://api.slack.com/apis/connections/events-api) => Communication platform
+- [Github](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api)
+- Jibble
+- [Slack](https://api.slack.com/apis/connections/events-api)
 
 #### Tools
 - [Nest](https://docs.nestjs.com/)
