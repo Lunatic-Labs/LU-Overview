@@ -1,5 +1,7 @@
 # LU-Overview
-A dashboard to display various statistics about the members and projects of Lunatic Labs
+A dashboard to display various statistics about the members and projects of Lunatic Labs.
+
+This project uses Angular for the frontend and a Nestjs server for the backend to connect with the APIs.
 
 ## Resources
 #### APIs
