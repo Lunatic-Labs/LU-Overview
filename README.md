@@ -13,6 +13,7 @@ A dashboard to display various statistics about the members and projects of Luna
 - [Angular](https://angular.io/docs)
 - [Angular CLI](https://angular.io/cli)
 - [Angular Material](https://material.angular.io/)
+- [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
 ## Team Members
 Name|Role
@@ -61,6 +62,8 @@ Nest: Navigate to `server/`, then run `npm run test`
 
 ### Github
 
-#### Commits
+##### Commits
+
 /github/commits/{id}/{user}
+
 Returns all commits from the repo specified by the id, optionally by author, limited to 1000.
