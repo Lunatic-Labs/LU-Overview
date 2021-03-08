@@ -9,6 +9,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -19,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
-		MatExpansionModule
+		MatExpansionModule,
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
