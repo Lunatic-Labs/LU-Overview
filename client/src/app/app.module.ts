@@ -8,12 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
-		DashboardComponent
+		DashboardComponent,
+		SettingsComponent
 	],
 	imports: [
 		BrowserModule,
