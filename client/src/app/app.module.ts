@@ -10,12 +10,14 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DataTestComponent } from './dto/data-test/data-test.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
-		DashboardComponent
+		DashboardComponent,
+		DataTestComponent
 	],
 	imports: [
 		BrowserModule,

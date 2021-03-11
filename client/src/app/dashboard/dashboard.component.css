@@ -65,6 +65,6 @@
   font-size: 20px;
 }
 
-.data {
-  margin-left: 80px;
+.data app-data-test {
+  display: flex;
 }
