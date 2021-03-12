@@ -2,13 +2,15 @@
 	<h1 class="h1">{{title}}</h1>
   <hr>
 </div>
-
 <div class="sidebar">
 	<h2>LU Overview</h2>
   <hr>
-		<a href="">Dashboard</a>
-    <a href="">Settings</a>
-		<a href="login/login.component.html">Sign out</a>
+		<a routerLink="/dashboard" routerLinkActive="active">
+      <img class="icon" src="https://img.icons8.com/material/24/FFFFFF/dashboard-layout.png"/>Dashboard</a>
+    <a routerLink="/settings" routerLinkActive="active">
+      <img class="icon" src="https://img.icons8.com/material-sharp/24/FFFFFF/settings.png"/>Settings</a>
+		<a routerLink="/login" routerLinkActive="active">
+      <img class="icon" src="https://img.icons8.com/metro/26/FFFFFF/exit.png"/>Log out</a>
 	<div>
 		<mat-accordion>
 			<mat-expansion-panel>
