@@ -1,3 +1,5 @@
+import { CommitFormattedBase } from "../../../common/models/github.type";
+
 export type CommitConfig = {
 	repo: number,
 	author?: string,
@@ -76,15 +78,4 @@ export interface ParentsEntity {
 // end of generated
 
 
-export interface CommitFormatted { //stripped down commmits
-	author: AuthorStripped;
-	message: string;
-	comment_count: number;
-	date: string;
-}
-export interface AuthorStripped {
-	commitName: string | null;
-	commmitEmail: string | null;
-	authorLogin: string | null;
-	authorId: number | null;
-}
+export interface CommitFormatted extends CommitFormattedBase {} //renaming base interface

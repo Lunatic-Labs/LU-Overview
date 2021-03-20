@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CommitFull, CommitConfig, GithubLink, CommitFormatted } from './github.interface';
+import { CommitFull, CommitConfig, GithubLink, CommitFormatted } from './github.type';
 var github = require("octonode");
 
 @Injectable()
