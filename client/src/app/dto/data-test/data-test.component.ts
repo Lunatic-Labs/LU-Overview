@@ -1,5 +1,5 @@
 import { DtoService } from './../dto.service';
-import { RepoCommits } from './../dto';
+import { RepoCommits } from "./../RepoCommits";
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,9 +14,8 @@ export class DataTestComponent implements OnInit {
   constructor(private dtoService: DtoService) { }
 
   ngOnInit(): void {
-    this.dtoService.getCommits()
+    (this.dtoService.getCommits())
         .subscribe(data => this.dto = data);
-        console.log(this.dto);
   }
-
+  //Use *ngFor="let item of dto" in a div tag to iterate through array
 }
