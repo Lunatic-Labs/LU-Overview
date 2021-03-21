@@ -20,47 +20,55 @@ export class DashboardComponent implements OnInit {
   createChart(id:string): void {
       let temp:any = document.getElementById('myChart');
       let temp1:any = document.getElementById('myChart1');
+      let temp2:any = document.getElementById('myChart2');
+      let temp3:any = document.getElementById('myChart3');
       let myChart = temp.getContext('2d');
       let myChart1 = temp1.getContext('2d');
+      let myChart2 = temp2.getContext('2d');
+      let myChart3 = temp3.getContext('2d');
 
-// Start of "Total Productivity Chart"
+// Start of "Github / Slack Chart"
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 18;
 Chart.defaults.global.defaultFontColor = '#777';
 
 let massPopChart = new Chart(myChart, {
-  type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+  type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
-    labels:['Jibble', 'Github', 'Slack', 'Meetings', 'Others'],
+    labels:['January', 'February', 'March', 'April', 'May'],
     datasets:[{
-      label:'Percentage',
-      data:[
-        20,
-        20,
-        20,
-        20,
-        20
-      ],
+      label:'Github Commits',
+      data:[0, 20, 15, 25, 10 ],
       //backgroundColor:'green',
+      //fill: false,
       backgroundColor:[
-        'rgba(255, 99, 132, 0.6)',
-        'rgba(54, 162, 235, 0.6)',
-        'rgba(255, 206, 86, 0.6)',
         'rgba(75, 192, 192, 0.6)',
-        'rgba(153, 102, 255, 0.6)',
-        'rgba(255, 159, 64, 0.6)',
-        'rgba(255, 99, 132, 0.6)'
+        'rgba(75, 192, 192, 0.6)',
       ],
       borderWidth:1,
-      borderColor:'#777',
+      borderColor:'rgb(0, 99, 132',
       hoverBorderWidth:3,
       hoverBorderColor:'#000'
-    }]
+  },
+  {
+    label:'Slack Messages',
+    data:[10, 30, 20, 15, 20 ],
+    //backgroundColor:'green',
+    //fill: false,
+    backgroundColor:[
+      'rgba(153, 102, 255, 0.6)',
+    ],
+    borderWidth:1,
+    borderColor:'rgb(0, 200, 0)',
+    hoverBorderWidth:3,
+    hoverBorderColor:'#000'
+  },
+]
   },
   options:{
     title:{
       display:true,
-      text:'Total Productivity',
+      text:'Github / Slack',
       fontSize:25
     },
     legend:{
@@ -94,6 +102,69 @@ Chart.defaults.global.defaultFontSize = 18;
 Chart.defaults.global.defaultFontColor = '#777';
 
 let massPopChart1 = new Chart(myChart1, {
+    type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          data:{
+        labels: ["January", "February", "March", "April", "May"],
+        datasets: [{
+            label: 'Commits',
+            backgroundColor: "rgba(220,220,220,0.5)",
+            data1: [5, 4, 2, 8, 7]
+        }, {
+            label: 'Merges',
+            backgroundColor: "rgba(151,187,205,0.5)",
+            data: [3, 4, 8, 3, 5]
+        }, {
+            label: 'Pulls',
+            backgroundColor: "rgba(82,154,190,0.5)",
+            data: [5, 6, 8, 2, 4]
+        }]
+  },
+  options:{
+    title: {
+        display: true,
+        text: "Github Data"
+    },
+    tooltips: {
+        mode: 'label',
+        callbacks: {
+            label: function(tooltipItem:any, data:any) {
+                var github = data.datasets[tooltipItem.datasetIndex].label;
+                var valor = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                var total = 0;
+                for (var i = 0; i < data.datasets.length; i++)
+                    total += data.datasets[i].data[tooltipItem.index];
+                if (tooltipItem.datasetIndex != data.datasets.length - 1) {
+                    return github + " : " + valor.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g);
+                } else {
+                    return [github + " : " + valor.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g), "Total : "+ total];
+                }
+            }
+        }
+    },
+    responsive: true,
+    scales: {
+        xAxes: [{
+            stacked: true,
+        }],
+        yAxes: [{
+        stacked: true,
+        scaleLabel: {
+        display: true,
+        labelString: 'Number of Commits'
+        }
+        }]
+    }
+}
+});
+// End of JIbble chart
+
+// Start of Example
+// Global Options
+Chart.defaults.global.defaultFontFamily = 'Lato';
+Chart.defaults.global.defaultFontSize = 18;
+Chart.defaults.global.defaultFontColor = '#777';
+
+let massPopChart2 = new Chart(myChart2, {
   type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
     labels:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -102,11 +173,11 @@ let massPopChart1 = new Chart(myChart1, {
       data:[
         2.15,
         3,
-        6,
+        0,
         1.45,
-        4.8,
-        5,
-        2
+        4.2,
+        1.3,
+        1
       ],
       //backgroundColor:'black',
       backgroundColor:[
@@ -147,12 +218,91 @@ let massPopChart1 = new Chart(myChart1, {
         top:0
       }
     },
-    tooltips:{
-      enabled:true
+    scales: {
+    xAxes: [{
+    scaleLabel: {
+    display: true,
+    labelString: 'Hours'
     }
+    }]
+}
   }
 });
-// End of JIbble chart
+// End of example
+
+// Start of myChart3
+Chart.defaults.global.defaultFontFamily = 'Lato';
+Chart.defaults.global.defaultFontSize = 18;
+Chart.defaults.global.defaultFontColor = '#777';
+
+let massPopChart3 = new Chart(myChart3, {
+  type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+  data:{
+    labels:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    datasets:[{
+      label:'Messages',
+      data:[5, 3, 7, 5, 8, 4, 3 ],
+      //backgroundColor:'black',
+      backgroundColor:[
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(153, 102, 255, 0.6)'
+
+      ],
+      borderWidth:1,
+      borderColor:'#777',
+      hoverBorderWidth:3,
+      hoverBorderColor:'#000'
+  },
+  {
+    label:'Calls',
+    data:[1,2, 3, 4, 5, 6, 7],
+    //backgroundColor:'black',
+    backgroundColor:[
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(54, 162, 235, 0.6)'
+
+    ],
+    borderWidth:1,
+    borderColor:'#777',
+    hoverBorderWidth:3,
+    hoverBorderColor:'#000'
+}
+]
+  },
+  options:{
+    title:{
+      display:true,
+      text:'Slack Data',
+      fontSize:25
+    },
+    legend:{
+      display:true,
+      position:'right',
+      labels:{
+        fontColor:'#000'
+      }
+    },
+    layout:{
+      padding:{
+        left:50,
+        right:0,
+        bottom:0,
+        top:0
+      }
+    },
+  }
+});
+// End of myChart3
   }
 
 }
