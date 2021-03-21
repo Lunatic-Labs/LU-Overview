@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CommitFull, CommitConfig, GithubLink, CommitFormatted } from './github.type';
 var github = require("octonode");
 
@@ -22,6 +22,10 @@ export class GithubService {
 			commitOptions.author = config.author;
 		}
 		
+		if (!this.testDatabase.repo[config.repo]) {
+			throw new NotFoundException();
+		}
+
 		let repo = this.client.repo(this.testDatabase.repo[config.repo]);
 		let [commits, headers]: [commits: Array<any>, headers: any] = await repo.commitsAsync(commitOptions); //get first page
 		//console.log(responseData);
@@ -64,7 +68,7 @@ export class GithubService {
 		commits.forEach((commit) => {
 			formatted.push({
 				author: { //shorthand for if(author exists) {return author.name} else if(committer exists) {return committer.name}
-						  //I did it this way because there is a possiblility for the authors and committors to be null
+						  //it is this way because there is a possiblility for the authors and committors to be null
 					commitName: (commit.commit.author && commit.commit.author.name) || (commit.commit.committer && commit.commit.committer.name),
 					commmitEmail: (commit.commit.author && commit.commit.author.email)  || (commit.commit.committer && commit.commit.committer.email),
 					authorLogin: (commit.author && commit.author.login) || (commit.committer && commit.committer.login),

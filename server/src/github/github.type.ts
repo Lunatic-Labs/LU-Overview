@@ -1,4 +1,4 @@
-import { CommitFormattedBase } from "../../../common/models/github.type";
+export { CommitFormatted } from "../common/models/github.type";
 
 export type CommitConfig = {
 	repo: number,
@@ -7,7 +7,7 @@ export type CommitConfig = {
 	until?: Date
 };
 
-export type GithubLink = { //it can have a key specified that has a url and page
+export type GithubLink = {
 	[K in ("next" | "last" | "first" | "prev")]?: {url: string, page: number}
 }
 
@@ -76,6 +76,3 @@ export interface ParentsEntity {
 	html_url: string;
 }
 // end of generated
-
-
-export interface CommitFormatted extends CommitFormattedBase {} //renaming base interface
