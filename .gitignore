@@ -1,2 +1,6 @@
 /.vs
 /*.code-workspace
+
+#ignoring symlinks
+**/common/**
+!/common/**
