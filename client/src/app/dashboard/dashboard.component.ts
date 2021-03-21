@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Component, OnInit } from '@angular/core';
 
 declare var Chart:any;
@@ -108,7 +110,7 @@ let massPopChart1 = new Chart(myChart1, {
         datasets: [{
             label: 'Commits',
             backgroundColor: "rgba(220,220,220,0.5)",
-            data1: [5, 4, 2, 8, 7]
+            data: [5, 4, 2, 8, 7]
         }, {
             label: 'Merges',
             backgroundColor: "rgba(151,187,205,0.5)",
@@ -127,7 +129,7 @@ let massPopChart1 = new Chart(myChart1, {
     tooltips: {
         mode: 'label',
         callbacks: {
-            label: function(tooltipItem:any, data:any) {
+            label: function(tooltipItem, data) {
                 var github = data.datasets[tooltipItem.datasetIndex].label;
                 var valor = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                 var total = 0;
@@ -148,10 +150,6 @@ let massPopChart1 = new Chart(myChart1, {
         }],
         yAxes: [{
         stacked: true,
-        scaleLabel: {
-        display: true,
-        labelString: 'Number of Commits'
-        }
         }]
     }
 }
