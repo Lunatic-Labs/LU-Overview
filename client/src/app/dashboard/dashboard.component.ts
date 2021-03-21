@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     //example
-    //this.test = JSON.stringify(await this.backendApiService.getCommits("2"));
+    //this.test = JSON.stringify(await this.backendApiService.getCommits("1"));
   }
 
 }
