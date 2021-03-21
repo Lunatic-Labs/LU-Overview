@@ -25,7 +25,7 @@ export class BackendApiService {
 		transform Observable to Promise for consumption in code
 	*/
 	async getAPI<T>(url: string, errorFunction: ErrorFunction<T>, urlExtensions?: string | Array<string | null> | null ): Promise<T> {
-		return await (this.getAPIObservable<T>(url, errorFunction, urlExtensions).toPromise());
+		return this.getAPIObservable<T>(url, errorFunction, urlExtensions).toPromise();
 	}
 
 	getAPIObservable<T>(url: string, errorFunction: ErrorFunction<T>, urlExtensions?: string | Array<string | null> | null ): Observable<T> {
