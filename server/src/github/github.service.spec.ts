@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { GithubService } from './github.service';
 import { GithubController } from './github.controller';
 import { GithubModule } from './github.module';
-const commits = require('./testing/commits.json');
+const commitTests = require('./testing/commits.json');
 
 describe('GithubService', () => {
 	let githubService: GithubService;
@@ -25,13 +25,13 @@ describe('GithubService', () => {
 
 	describe('parseGithubLink', () => {
 		it('should return an object that has the relation as the key with the url and page number', () => {
-			expect(githubService.parseGithubLink(commits.parseGithubLink.input)).toEqual(commits.parseGithubLink.output);
+			expect(githubService.parseGithubLink(commitTests.parseGithubLink.input)).toEqual(commitTests.parseGithubLink.output);
 		});
 	});
 
-	describe('getCommits', () => { //if getCommits ever does anything with the commits, the test data will need to be updated
+	describe('getCommits', () => {
 		it('should return a list of commits', async () => {
-			let mockCommits = jest.fn().mockResolvedValueOnce(commits.getCommits.inputs[0]).mockResolvedValueOnce(commits.getCommits.inputs[1]).mockResolvedValueOnce(commits.getCommits.inputs[2]);
+			let mockCommits = jest.fn().mockResolvedValueOnce(commitTests.getCommits.inputs[0]).mockResolvedValueOnce(commitTests.getCommits.inputs[1]).mockResolvedValueOnce(commitTests.getCommits.inputs[2]);
 			//this is for replacing the octonode repo.commitsAsync, it needs this because it gets generated from client.repo
 			githubService.client.repo = (a) => {
 				return {
@@ -40,8 +40,14 @@ describe('GithubService', () => {
 			};
 			
 			let result = await githubService.getCommits({ repo: 1 });
-			expect(result).toEqual(commits.getCommits.output);
+			expect(result).toEqual(commitTests.getCommits.output);
 			expect(mockCommits).toHaveBeenCalledTimes(3);
 		});
 	});
+
+	describe('formatCommits', () => {
+		it('should take an array of full commits and return a list of formatted commits', () => {
+			expect(githubService.formatCommits(commitTests.formatCommits.input)).toEqual(commitTests.formatCommits.output);
+		});
+	})
 });
