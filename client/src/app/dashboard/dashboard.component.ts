@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { Component, OnInit } from '@angular/core';
+import { BackendApiService } from '../backend-connection/backend-api.service';
 
 declare var Chart:any;
 @Component({
@@ -11,8 +12,10 @@ declare var Chart:any;
 export class DashboardComponent implements OnInit {
 
   title = 'Dashboard';
+  test = "start";
 
-  constructor() { }
+  constructor(private backendApiService: BackendApiService) { }
+
 
   ngOnInit(): void {
       this.createChart('myChart');
@@ -303,6 +306,7 @@ let massPopChart3 = new Chart(myChart3, {
   }
 });
 // End of myChart3
+
   }
 
 }
