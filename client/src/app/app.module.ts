@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MatExpansionModule,
+		NgbModule,
 		HttpClientModule
 	],
 	providers: [],
