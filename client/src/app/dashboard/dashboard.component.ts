@@ -111,15 +111,17 @@ let massPopChart1 = new Chart(myChart1, {
             label: 'Commits',
             backgroundColor: "rgba(220,220,220,0.5)",
             data: [5, 4, 2, 8, 7]
-        }, {
-            label: 'Merges',
-            backgroundColor: "rgba(151,187,205,0.5)",
-            data: [3, 4, 8, 3, 5]
-        }, {
-            label: 'Pulls',
-            backgroundColor: "rgba(82,154,190,0.5)",
-            data: [5, 6, 8, 2, 4]
-        }]
+        }
+        // , {
+        //     label: 'Merges',
+        //     backgroundColor: "rgba(151,187,205,0.5)",
+        //     data: [3, 4, 8, 3, 5]
+        // }, {
+        //     label: 'Pulls',
+        //     backgroundColor: "rgba(82,154,190,0.5)",
+        //     data: [5, 6, 8, 2, 4]
+        // }
+    ]
   },
   options:{
     title: {
@@ -128,20 +130,20 @@ let massPopChart1 = new Chart(myChart1, {
     },
     tooltips: {
         mode: 'label',
-        callbacks: {
-            label: function(tooltipItem, data) {
-                var github = data.datasets[tooltipItem.datasetIndex].label;
-                var valor = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                var total = 0;
-                for (var i = 0; i < data.datasets.length; i++)
-                    total += data.datasets[i].data[tooltipItem.index];
-                if (tooltipItem.datasetIndex != data.datasets.length - 1) {
-                    return github + " : " + valor.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g);
-                } else {
-                    return [github + " : " + valor.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g), "Total : "+ total];
-                }
-            }
-        }
+        // callbacks: {
+        //     label: function(tooltipItem, data) {
+        //         var github = data.datasets[tooltipItem.datasetIndex].label;
+        //         var valor = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+        //         var total = 0;
+        //         for (var i = 0; i < data.datasets.length; i++)
+        //             total += data.datasets[i].data[tooltipItem.index];
+        //         if (tooltipItem.datasetIndex != data.datasets.length - 1) {
+        //             return github + " : " + valor.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g);
+        //         } else {
+        //             return [github + " : " + valor.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g), "Total : "+ total];
+        //         }
+        //     }
+        // }
     },
     responsive: true,
     scales: {
