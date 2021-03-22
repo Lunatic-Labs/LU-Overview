@@ -69,3 +69,15 @@ Nest: Navigate to `server/`, then run `npm run test`
 /github/commits/{id}/{user}
 
 Returns all commits from the repo specified by the id, optionally by author, limited to 1000.
+
+## Client
+
+### Backend Api
+
+##### getCommits(repo, user?, errorFunction?)
+
+Get commits from a repo, limited to 1000, with an optional user filter, and an error callback function.
+
+- repo: Name/Id(decide) of repo
+- user?: Name of a user to filter by
+- errorFunction?: A function that can take a HttpErrorResponse and return a default value, returning nothing throws an error instead
