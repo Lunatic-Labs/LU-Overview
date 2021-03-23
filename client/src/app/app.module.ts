@@ -6,16 +6,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
-		DashboardComponent
+		DashboardComponent,
+		GraphComponent
 	],
 	imports: [
 		BrowserModule,
