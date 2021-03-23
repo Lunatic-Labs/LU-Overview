@@ -24,7 +24,7 @@ export class BackendApiService {
 	/*
 		transform Observable to Promise for consumption in code
 	*/
-	async getAPI<T>(url: string, errorFunction: ErrorFunction<T>, urlExtensions?: string | Array<string | null> | null ): Promise<T> {
+	getAPI<T>(url: string, errorFunction: ErrorFunction<T>, urlExtensions?: string | Array<string | null> | null ): Promise<T> {
 		return this.getAPIObservable<T>(url, errorFunction, urlExtensions).toPromise();
 	}
 
@@ -64,7 +64,6 @@ export class BackendApiService {
 		the error function can take a HttpErrorResponse and the return value will become the default on an error, if it returns nothing an error will be thrown
 	*/
 	async getCommits(repo: string, user: string | null = null, errorFunction: ErrorFunction<CommitResponse> = () => {}): Promise<CommitResponse> {
-		let res = await this.getAPI<CommitResponse>("github/commits", errorFunction, [repo, user || null]);
-		return Promise.resolve(res);
+		return this.getAPI<CommitResponse>("github/commits", errorFunction, [repo, user || null]);
 	}
 }
