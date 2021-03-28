@@ -8,7 +8,8 @@ export class GithubService {
 		repo: {
 			1: "spencer012/Game-8",
 			2: "d-oliveros/nest",
-			3: "Lunatic-Labs/LU-Overview"
+			3: "Lunatic-Labs/LU-Overview",
+			4: "Lunatic-Labs/Operations"
 		}
 	}
 

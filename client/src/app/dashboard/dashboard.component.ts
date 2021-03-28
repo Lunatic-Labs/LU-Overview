@@ -25,6 +25,10 @@ export class DashboardComponent implements OnInit {
 
 
 	async ngOnInit(): Promise<void> { //TODO: comment
+		await this.initGraphs();
+	}
+
+	private async initGraphs() {
 		let githubMonthsO: Subscriber<ChartConfiguration> | undefined;
 		let githubPerDaysO: Subscriber<ChartConfiguration> | undefined;
 		let githubLastDaysO: Subscriber<ChartConfiguration> | undefined;
@@ -72,11 +76,11 @@ export class DashboardComponent implements OnInit {
 			eachMonth[month]++;
 			perDay[day]++;
 
-			if(date.getTime() > weekAgo.getTime()) {
+			if (date.getTime() > weekAgo.getTime()) {
 				last7Days[(day + (6 - today)) % 7]++;
 			}
 		});
-		
+
 		let shiftedDays: Array<string> = [];
 		for (let i = 0; i < 7; i++) {
 			shiftedDays[(i + (6 - today)) % 7] = days[i];
@@ -92,7 +96,7 @@ export class DashboardComponent implements OnInit {
 		});
 
 		githubMonthsO?.next(this.createGithubChartConfig(monthLabels, monthData, "Commits", "Commits Per Month"));
-		githubMonthsO?.complete()
+		githubMonthsO?.complete();
 
 		githubPerDaysO?.next(this.createGithubChartConfig(days, perDay, "Commits", "Commits On Day"));
 		githubPerDaysO?.complete();
@@ -112,7 +116,7 @@ export class DashboardComponent implements OnInit {
 				labels: labels,
 				datasets: [{
 					label: label,
-					backgroundColor: "rgba(220,220,220,0.5)",
+					backgroundColor: "rgba(130,130,130,0.6)",
 					data: data
 				}]
 			},
