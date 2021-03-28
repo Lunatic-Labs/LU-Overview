@@ -1,5 +1,5 @@
-import { OnInit, Component, ElementRef, Input, ViewChild, AfterViewInit } from '@angular/core';
-import { Chart, ChartConfiguration, ChartData, ChartOptions } from "chart.js";
+import { Component, ElementRef, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Chart, ChartConfiguration } from "chart.js";
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -35,13 +35,4 @@ export class GraphComponent implements AfterViewInit {
 			}});
 		}
 	}
-	/*async ngAfterViewInit(): Promise<void> {
-		if (this.config) {
-			Chart.defaults.global.defaultFontFamily = 'Lato';
-			Chart.defaults.global.defaultFontSize = 18;
-			Chart.defaults.global.defaultFontColor = '#777';
-
-			this.chart = new Chart(this.chartRef.nativeElement, await this.config);
-		}
-	}*/
 }

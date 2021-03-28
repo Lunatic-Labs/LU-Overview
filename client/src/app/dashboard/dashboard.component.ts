@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartDataSets } from 'chart.js';
 import { Observable, Subscriber } from 'rxjs';
 import { BackendApiService } from '../backend-connection/backend-api.service';
 import { CommitResponse } from '../backend-connection/backend-api.type';
@@ -14,21 +14,24 @@ import { days, months } from "../../common/constants/time.type";
 export class DashboardComponent implements OnInit {
 
 	title = 'Dashboard';
-	configs: {
+	configs: { //each one of these is a different graph
 		githubMonths: Observable<ChartConfiguration>,
 		githubPerDays: Observable<ChartConfiguration>,
 		githubLastDays: Observable<ChartConfiguration>
 	};
 	totalCommits = 0;
 
-	constructor(private backendApiService: BackendApiService) {	}
+	constructor(private backendApiService: BackendApiService) { }
 
 
-	async ngOnInit(): Promise<void> { //TODO: comment
+	async ngOnInit(): Promise<void> {
 		await this.initGraphs();
 	}
 
-	private async initGraphs() {
+	// initialize all the graphs
+	private async initGraphs(): Promise<void> {
+		// here, I am making several observables for the graph component to pick up
+		// then later giving it the data b/c of the delay
 		let githubMonthsO: Subscriber<ChartConfiguration> | undefined;
 		let githubPerDaysO: Subscriber<ChartConfiguration> | undefined;
 		let githubLastDaysO: Subscriber<ChartConfiguration> | undefined;
@@ -44,7 +47,7 @@ export class DashboardComponent implements OnInit {
 			})
 		};
 
-		let data = await this.getData();
+		let data = await this.getData(); //get the commits
 
 		this.totalCommits = data.length;
 
@@ -54,6 +57,7 @@ export class DashboardComponent implements OnInit {
 		weekAgo.setDate(weekAgo.getDate() - 6);
 		weekAgo.setHours(0, 0, 0, 0);
 
+		//initalizing arrays with 0s
 		let eachMonth: Array<number> = [];
 		for (let i = 0; i < 12; i++) {
 			eachMonth[i] = 0;
@@ -65,7 +69,7 @@ export class DashboardComponent implements OnInit {
 			last7Days[i] = 0;
 		}
 
-		let maxM = 0, minM = 12;
+		let maxM = 0, minM = 12; //max and min for month
 		data.forEach(commit => {
 			let date = new Date(commit.date);
 			let month = date.getMonth();
@@ -77,19 +81,19 @@ export class DashboardComponent implements OnInit {
 			perDay[day]++;
 
 			if (date.getTime() > weekAgo.getTime()) {
-				last7Days[(day + (6 - today)) % 7]++;
+				last7Days[(day + (6 - today)) % 7]++; //shift array so today is the last element of the array
 			}
 		});
 
 		let shiftedDays: Array<string> = [];
-		for (let i = 0; i < 7; i++) {
+		for (let i = 0; i < 7; i++) { //shift array so today is the last element of the array
 			shiftedDays[(i + (6 - today)) % 7] = days[i];
 		}
 
 		let monthLabels: Array<string> = [];
 		let monthData: Array<number> = [];
 		months.forEach((name, i) => {
-			if (i >= minM && i <= maxM) {
+			if (i >= minM && i <= maxM) { //minimize the month array to only the months that have commits and the months between those
 				monthLabels.push(name);
 				monthData.push(eachMonth[i]);
 			}
@@ -116,7 +120,7 @@ export class DashboardComponent implements OnInit {
 				labels: labels,
 				datasets: [{
 					label: label,
-					backgroundColor: "rgba(130,130,130,0.6)",
+					backgroundColor: "rgba(130,130,130,0.6)", //darkish grey
 					data: data
 				}]
 			},
@@ -142,6 +146,7 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 
+	// old hardcoded graphs to copy from later
 	/*createChartOld(id: string): void {
 		let temp: any = document.getElementById('myChart');
 		let temp1: any = document.getElementById('myChart1');
