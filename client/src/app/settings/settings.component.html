@@ -7,7 +7,7 @@
     <div class="card overflow-hidden">
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
-                <div class="list-group list-group-flush account-settings-links">
+                <div class="list-group list-group-flush account-settings-links" id="myList">
                     <a class="list-group-item list-group-item-action active" data-toggle="list"
                         href="#account-general">General</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list"
@@ -288,4 +288,10 @@
         <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
         <button type="button" class="btn btn-default">Cancel</button>
     </div>
+    <script>
+      $(".list-group list-group-flush account-settings-links a").click(function(){
+     $(this).tab('show');
+ });
+    </script>
 </div>
+

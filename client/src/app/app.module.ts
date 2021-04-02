@@ -9,19 +9,23 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SDetailsComponent } from './s-details/s-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
 		DashboardComponent,
-		SettingsComponent
+		SettingsComponent,
+		SDetailsComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
-		MatExpansionModule
+		MatExpansionModule,
+		NgbModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
