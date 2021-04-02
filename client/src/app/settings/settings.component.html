@@ -7,20 +7,23 @@
     <div class="card overflow-hidden">
         <div class="row no-gutters row-bordered row-border-light">
             <div class="col-md-3 pt-0">
-                <div class="list-group list-group-flush account-settings-links" id="myList">
+                <div class="list-group list-group-flush account-settings-links">
                     <a class="list-group-item list-group-item-action active" data-toggle="list"
-                        href="#account-general">General</a>
+                        [routerLink]="['/settings', 'account-general']">General</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-change-password">Change password</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
+                        [routerLink]="['/settings', 'account-change-password']">Change
+                        password</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-social-links">Social links</a>
+                        [routerLink]="['/settings', 'account-info']">Info</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-connections">Connections</a>
+                        [routerLink]="['/settings', 'account-social-links']">Social links</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list"
-                        href="#account-notifications">Notifications</a>
+                        [routerLink]="['/settings', 'account-connections']">Connections</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                        [routerLink]="['/settings', 'account-notifications']">Notifications</a>
                 </div>
             </div>
+
             <div class="col-md-9">
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="account-general">
@@ -64,7 +67,7 @@
                         </div>
 
                     </div>
-
+                    <!-- 
 
 
 
@@ -177,7 +180,8 @@
 
                     <div class="tab-pane fade" id="account-connections">
                         <div class="card-body">
-                            <button type="button" class="btn btn-twitter">Connect to <strong>Twitter</strong></button>
+                            <button type="button" class="btn btn-twitter">Connect to
+                                <strong>Twitter</strong></button>
                         </div>
                         <hr class="border-light m-0">
                         <div class="card-body">
@@ -191,7 +195,8 @@
                         </div>
                         <hr class="border-light m-0">
                         <div class="card-body">
-                            <button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
+                            <button type="button" class="btn btn-facebook">Connect to
+                                <strong>Facebook</strong></button>
                         </div>
                         <hr class="border-light m-0">
                         <div class="card-body">
@@ -227,7 +232,8 @@
                                         <span class="switcher-yes"></span>
                                         <span class="switcher-no"></span>
                                     </span>
-                                    <span class="switcher-label">Email me when someone answers on my forum thread</span>
+                                    <span class="switcher-label">Email me when someone answers on my forum
+                                        thread</span>
                                 </label>
                             </div>
                             <div class="form-group">
@@ -280,18 +286,13 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+                </div>
             </div>
+
+            <div class="text-right mt-3">
+                <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+                <button type="button" class="btn btn-default">Cancel</button>
+            </div>
+
         </div>
-    </div>
-
-    <div class="text-right mt-3">
-        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-        <button type="button" class="btn btn-default">Cancel</button>
-    </div>
-    <script>
-      $(".list-group list-group-flush account-settings-links a").click(function(){
-     $(this).tab('show');
- });
-    </script>
-</div>
-

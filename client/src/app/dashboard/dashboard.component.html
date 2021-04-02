@@ -1,14 +1,16 @@
 <div class="dashboard">
 	<h1 class="h1">{{title}}</h1>
-  <hr>
+	<hr>
 </div>
 
 <div class="sidebar">
 	<h2>LU Overview</h2>
-  <hr>
-		<a href="">Dashboard</a>
-    <a routerLink="/settings" routerLinkActive="active">Settings</a>
-		<a href="login/login.component.html">Sign out</a>
+	<hr>
+	<nav>
+		<a routerlink="/dashboard" routerLinkActive="active">Dashboard</a>
+		<a routerLink="/settings" routerLinkActive="active">Settings</a>
+		<a routerLink="/login" routerLinkActive="active">Sign out</a>
+	</nav>
 	<div>
 		<mat-accordion>
 			<mat-expansion-panel>
@@ -31,4 +33,3 @@
 		</mat-accordion>
 	</div>
 </div>
-
