@@ -7,6 +7,7 @@ try {
 	githubToken = require("../secrets/tokens").githubToken;
 } catch (e) {
 	githubToken = null
+	console.error("Github token was not supplied, reverting to public api");
 }
 
 @Injectable()
