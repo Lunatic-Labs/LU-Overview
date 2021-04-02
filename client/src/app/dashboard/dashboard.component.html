@@ -12,7 +12,7 @@
 	<article class="wrapper">
 		<section class="main">
 			<section class="tab-content">
-				<section class="tab-pane active fade in content" id="dashboard">
+				<section class="tab-pane active content" id="dashboard">
 					<div class="row mb-3">
 						<div class="col-xl-3 col-lg-6">
 							<div class="card card-inverse card-success">
@@ -21,7 +21,7 @@
 										<i class="fa fa-user fa-5x"></i>
 									</div>
 									<h6 class="text-uppercase">Total Hours Worked This Week</h6>
-									<h1 class="display-1">100</h1>
+									<h1 class="display-1">--</h1>
 								</div>
 							</div>
 						</div>
@@ -32,7 +32,7 @@
 										<i class="fa fa-list fa-4x"></i>
 									</div>
 									<h6 class="text-uppercase">Total Hours Worked Today</h6>
-									<h1 class="display-1">9</h1>
+									<h1 class="display-1">--</h1>
 								</div>
 							</div>
 						</div>
@@ -42,8 +42,8 @@
 									<div class="rotate">
 										<i class="fa fa-cubes fa-5x"></i>
 									</div>
-									<h6 class="text-uppercase">-----</h6>
-									<h1 class="display-1">125</h1>
+									<h6 class="text-uppercase">Total Slack Communication</h6>
+									<h1 class="display-1">--</h1>
 								</div>
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 										<i class="fa fa-share fa-5x"></i>
 									</div>
 									<h6 class="text-uppercase">Total Github Commits</h6>
-									<h1 class="display-1">36</h1>
+									<h1 class="display-1">{{totalCommits}}</h1>
 								</div>
 							</div>
 						</div>
@@ -132,24 +132,18 @@
 
 						<div class="col-lg-6 col-md-5">
 							<!--  -->
-							<div class="container">
-  							<canvas id="myChart" class="chart"></canvas>
-							</div>
+							  <app-graph class="container" [config]="configs.githubLastDays"></app-graph>
 							<!--  -->
 						</div>
 						<div class="col-lg-6 col-md-5">
 							<!--  -->
-							<div class="container">
-							<canvas id="myChart2" class="chart"></canvas>
-							</div>
+							  <app-graph class="container" [config]="configs.githubPerDays"></app-graph>
 							<!--  -->
 						</div>
 
 						<div class="col-lg-6 col-md-5">
 							<!--  -->
-							<div class="container">
-							<canvas id="myChart1" class="chart"></canvas>
-							</div>
+							  <app-graph class="container" [config]="configs.githubMonths"></app-graph>
 							<!--  -->
 						</div>
 
