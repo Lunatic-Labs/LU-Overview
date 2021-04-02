@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
 
 	async ngOnInit(): Promise<void> {
-		await this.initGraphs();
+		this.initGraphs();
 	}
 
 	// initialize all the graphs
