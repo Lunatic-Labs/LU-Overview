@@ -14,6 +14,7 @@ const passport = require('passport')
 const express = require('express')
 const app = express()
 const keys = require('./keys.js');
+const cookieSession = require('cookie-session');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -50,5 +51,14 @@ passport.serializeUser((user, done) => {
 //     done(null, user);
 //   });
 // });
+
+app.use(cookieSession({
+  // miliseconds of a day
+  maxAge: 24*60*60*1000,
+  keys:[keys.session.cookieKey]
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Source: https://dev.to/phyllis_yym/beginner-s-guide-to-google-oauth-with-passport-js-2gh4 //
