@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { userInfo } from 'os';
 import { AppModule } from './app.module';
-
+import { Keys } from 'keys.js';
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -13,15 +13,15 @@ bootstrap();
 const passport = require('passport')
 const express = require('express')
 const app = express()
-const keys = require('./keys.js');
+const Keys = require('./keys.js'); 
 const cookieSession = require('cookie-session');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 //This is the template // Not currently functional
 passport.use(new GoogleStrategy({
-    clientID: keys.google.clientID,
-    clientSecret: keys.google.clientSecret,
+    clientID: /*GOOGLE_CLIENT_ID,/*/Keys.google.clientID,
+    clientSecret: /*GOOGLE_CLIENT_SECRET,/*/Keys.google.clientSecret,
     callbackURL: "/auth/google/callback"
   },
   // Use this when working with a database
@@ -55,7 +55,7 @@ passport.serializeUser((user, done) => {
 app.use(cookieSession({
   // miliseconds of a day
   maxAge: 24*60*60*1000,
-  keys:[keys.session.cookieKey]
+  keys:[Keys.session.cookieKey]
 }));
 
 app.use(passport.initialize());
