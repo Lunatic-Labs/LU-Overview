@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { userInfo } from 'os';
 import { AppModule } from './app.module';
-import { Keys } from 'keys.js';
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -12,24 +11,21 @@ bootstrap();
 
 const passport = require('passport')
 const express = require('express')
-const app = express()
-const Keys = require('./keys.js'); 
+const app = express() 
 const cookieSession = require('cookie-session');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-//This is the template // Not currently functional
 passport.use(new GoogleStrategy({
-    clientID: /*GOOGLE_CLIENT_ID,/*/Keys.google.clientID,
-    clientSecret: /*GOOGLE_CLIENT_SECRET,/*/Keys.google.clientSecret,
+    clientID: "743003796061-jigk802a0riu4ad5olu1hnfstif59gvd.apps.googleusercontent.com",//keys.google.clientID,
+    clientSecret: "G8NzByGxej5IA_K_9SCvAl8Z",//keys.google.clientSecret,
     callbackURL: "/auth/google/callback"
   },
-  // Use this when working with a database
-  //function(accessToken, refreshToken, profile, cb) {
-  //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-  //    return cb(err, user);
-  //  });
-  //}
+  function(accessToken, refreshToken, profile, cb) {
+   User.findOrCreate({ googleId: profile.id }, function (err, user) {
+     return cb(err, user); //STILL NEED TO CREATE USER MODEL(S)
+   });
+  }
 ));
 
 ///Define Routes///
@@ -55,7 +51,7 @@ passport.serializeUser((user, done) => {
 app.use(cookieSession({
   // miliseconds of a day
   maxAge: 24*60*60*1000,
-  keys:[Keys.session.cookieKey]
+  keys:["123ThIs_iS_tHe_CoOkIe_KeY456"/*keys.session.cookieKey*/]
 }));
 
 app.use(passport.initialize());
