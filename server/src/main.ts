@@ -13,7 +13,7 @@ const passport = require('passport')
 const express = require('express')
 const app = express() 
 const cookieSession = require('cookie-session');
-
+const User = require("passport/models/user.ts");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
@@ -21,9 +21,9 @@ passport.use(new GoogleStrategy({
     clientSecret: "G8NzByGxej5IA_K_9SCvAl8Z",//keys.google.clientSecret,
     callbackURL: "/auth/google/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
+  function(accessToken, refreshToken, profile, done) {
    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-     return cb(err, user); //STILL NEED TO CREATE USER MODEL(S)
+     return done(err, user);
    });
   }
 ));
