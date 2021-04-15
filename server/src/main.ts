@@ -31,9 +31,10 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-     return done(err, user);
-   });
+    //Use commented section when working with a db
+   //User.findOrCreate({ googleId: profile.id }, function (err, user) {
+     return done(null, profile);
+  // });
   }
 ));
 
@@ -48,14 +49,15 @@ app.get("/google/callback",passport.authenticate('google'));
 
 //Keep track of logged in status if Google is not used
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user);
 });
 
-// passport.deserializeUser((id, done) => {
-//   User.findById(id).then(user => {
-//     done(null, user);
-//   });
-// });
+ passport.deserializeUser((user, done) => {
+   //Use commented section when working with a db
+  // User.findById(id).then(user => {
+     done(null, user);
+  // });
+});
 
 app.use(cookieSession({
   // miliseconds of a day
