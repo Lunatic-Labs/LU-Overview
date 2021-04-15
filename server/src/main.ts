@@ -19,7 +19,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID: "743003796061-jigk802a0riu4ad5olu1hnfstif59gvd.apps.googleusercontent.com",//keys.google.clientID,
     clientSecret: "G8NzByGxej5IA_K_9SCvAl8Z",//keys.google.clientSecret,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "http://localhost:3000/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
    User.findOrCreate({ googleId: profile.id }, function (err, user) {
