@@ -58,6 +58,12 @@ app.get("/google/callback",passport.authenticate('google'), { failureReditect: '
 
 app.get('/good', isLoggedIn, (req, res) => res.send(`Welcome ${req.user.email}!`));
 app.get('/failed', (req, res) => res.send(`You failed to log in!`));
+
+app.get('/logout', (req, res) => {
+  req.session = null; //clear session
+  req.logout(); //logout from passport
+  res.redirect('/');
+})
 ///////////////////
 
 //Keep track of logged in status if Google is not used
