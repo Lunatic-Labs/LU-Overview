@@ -15,7 +15,7 @@ const app = express()
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-const User = require("passport/models/user.ts");
+const User = require("passport/models/user.ts"); //for use with db
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const isLoggedIn = (req, res, next) => {
