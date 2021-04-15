@@ -18,6 +18,14 @@ const cookieSession = require('cookie-session');
 const User = require("passport/models/user.ts");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+const isLoggedIn = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+}
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -48,7 +56,7 @@ app.get("/google/callback",passport.authenticate('google'), { failureReditect: '
     res.redirect('/good');
   }
 
-app.get('/good', (req, res) => res.send(`Welcome ${req.user.email}!`));
+app.get('/good', isLoggedIn, (req, res) => res.send(`Welcome ${req.user.email}!`));
 app.get('/failed', (req, res) => res.send(`You failed to log in!`));
 ///////////////////
 
