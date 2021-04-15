@@ -12,9 +12,15 @@ bootstrap();
 const passport = require('passport')
 const express = require('express')
 const app = express() 
+const cors = require('cors');
 const cookieSession = require('cookie-session');
 const User = require("passport/models/user.ts");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+app.use(cors());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(new GoogleStrategy({
     clientID: "743003796061-jigk802a0riu4ad5olu1hnfstif59gvd.apps.googleusercontent.com",//keys.google.clientID,
@@ -54,7 +60,6 @@ app.use(cookieSession({
   keys:["123ThIs_iS_tHe_CoOkIe_KeY456"/*keys.session.cookieKey*/]
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 // Source: https://dev.to/phyllis_yym/beginner-s-guide-to-google-oauth-with-passport-js-2gh4 //
