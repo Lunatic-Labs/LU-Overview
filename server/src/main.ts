@@ -29,11 +29,11 @@ passport.use(new GoogleStrategy({
 ));
 
 ///Define Routes///
-app.get('/auth/google', passport.authenticate("google", {
+app.get('/google', passport.authenticate("google", {
     scope: ['profile', 'email']
 }));
 
-app.get("/auth/google/callback",passport.authenticate('google'));
+app.get("/google/callback",passport.authenticate('google'));
 
 ///////////////////
 
