@@ -61,7 +61,7 @@ function(accessToken, refreshToken, profile, done) {
 ));
 
 
-///Routes///
+///Routes//////////
 app.get('/auth/google', 
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
