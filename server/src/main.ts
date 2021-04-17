@@ -17,7 +17,7 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 //const User = require("passport/models/user.ts"); //for use with db
 //require('./passport/passport-setup.ts');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy; //google-oauth20').Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy; //google-oauth').OAuth2Strategy
 
 const isLoggedIn = (req, res, next) => {
   if (req.user) {
@@ -63,15 +63,24 @@ function(accessToken, refreshToken, profile, done) {
 
 ///Routes//////////
 app.get('/auth/google', 
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
+  passport.authenticate('google', 
+    { scope: ['profile', 'email'] }));
 
-app.get("/auth/google/callback",passport.authenticate('google', { failureRedirect: '/failed' }),
-  function (req, res) {
-    res.redirect('/good');
+app.get("/auth/google/callback", 
+  passport.authenticate('google', 
+    { failureRedirect: '/failed' }),
+    function (req, res) {
+      res.redirect('/good');
   });
 
-app.get('/good', isLoggedIn, (req, res) => res.send(`Welcome ${req.user.email}!`));
-app.get('/failed', (req, res) => res.send(`You failed to log in!`));
+app.get('/good', 
+  isLoggedIn, 
+  (req, res) => 
+    res.send(`Welcome ${req.user.email}!`));
+    
+app.get('/failed', 
+  (req, res) => 
+    res.send(`You failed to log in!`));
 
 app.get('/logout', (req, res) => {
   req.session = null; //clear session
