@@ -77,6 +77,8 @@ body.modal-open {
 
 .card {
   overflow: hidden;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .card-block .rotate {
@@ -127,17 +129,18 @@ width: 100%;
 }
 
 .dashboard hr {
-  margin-top: 1.5rem;
-  margin-bottom: 0.9rem;
-  margin-left: 5rem;
-  margin-right: 3rem;
+  margin-top: 1.8rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   border: 0;
   border-top: 0.5px solid #260859;
 }
 
 .h1 {
-  padding-left: 235px;
+  padding-left: 180px;
   padding-top: 33px;
+  margin-bottom: -10px;
   font-size: 40px;
   color:rgb(0, 0, 0)
 }
@@ -178,8 +181,8 @@ width: 100%;
 .sidebar hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   border: 0;
   border-top: 0.5px solid rgba(248, 245, 245, 0.377);
 }
