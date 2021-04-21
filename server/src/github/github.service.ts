@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { DatabaseService } from 'src/database/database.service';
 import { CommitFull, CommitConfig, GithubLink, CommitFormatted } from './github.type';
+
 var github = require("octonode");
 var githubToken: string | null;
 
@@ -12,6 +14,8 @@ try {
 
 @Injectable()
 export class GithubService {
+	static initialized = false;
+
 	testDatabase = {
 		repo: {
 			1: "spencer012/Game-8",
@@ -25,8 +29,23 @@ export class GithubService {
 
 	client: any;
 
-	constructor() {
+	constructor(private readonly database: DatabaseService) {
 		this.client = (githubToken ? github.client(githubToken) : github.client());
+
+		if(!GithubService.initialized) {
+			GithubService.initialized = true;
+			this.initalizeRepos();
+		}
+	}
+
+	async initalizeRepos() {
+		let repos = await this.database.getAllRepos();
+
+		console.log(await this.database.getRepo("Lunatic-Labs/LU-Overview"));
+
+		repos.forEach(async repo => {
+			
+		});
 	}
 
 
@@ -92,7 +111,8 @@ export class GithubService {
 				},
 				message: commit.commit.message,
 				comment_count: commit.commit.comment_count,
-				date: commit.commit.author.date || commit.commit.committer.date
+				date: commit.commit.author.date || commit.commit.committer.date,
+				sha: commit.sha
 			})
 		});
 
