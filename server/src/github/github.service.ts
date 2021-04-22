@@ -54,6 +54,8 @@ export class GithubService {
 			if (!repoObj.commits || Object.keys(repoObj.commits).length == 0) {
 				console.log(`Initalizing repo ${repoObj.name}`);
 				this.initializeRepo(repoObj.name);
+			} else {
+				this.updateRepo(repoObj.name);
 			}
 		});
 	}
@@ -174,7 +176,33 @@ export class GithubService {
 		});
 
 		let savedBranches = await this.database.getBranches(name);
-		if (Object.keys(savedBranches).length != branches.length || )
+		let keys = Object.keys(savedBranches); //TODO: implement smart branch updating
+		if (keys.length != branches.length || keys.filter(x => branches.includes(x)).length != branches.length) {
+			this.initializeRepo(name);
+			return;
+		}
+
+		let latestCommitsRaw = await this.client(this.constructUpdateQuery(branches, 1), {owner: nameSplit[0], name: nameSplit[1]}) as CommitsFull; //shortcut, only has oid
+		let differentOid = [];
+
+		let branchesRaw = Object.values(latestCommitsRaw.repository);
+		for (let i = 0; i < branchesRaw.length; i++) {
+			let commitNodes = branchesRaw[i].target.history.nodes;
+			if (!commitNodes) {
+				if (savedBranches[branches[i]] != "") {
+					differentOid.push(branches[i]);
+				}
+				continue;
+			}
+			if (commitNodes[0].oid != savedBranches[branches[i]]) {
+				differentOid.push(branches[i]);
+			}
+		}
+
+		if (differentOid.length > 0) { //TODO: implement smart commit updating
+			this.initializeRepo(name);
+			return;
+		}
 	}
 
 	constructInitalQuery(main: string, mainNum: number, branches: Array<string>, branchNum: number): string {
@@ -282,7 +310,7 @@ export class GithubService {
 		}`;
 		return query;
 	}
-	constructUpdateQuery(branches: Array<string>): string {
+	constructUpdateQuery(branches: Array<string>, number: number, full: boolean = false): string {
 		let query =
 			`query ($owner: String!, $name: String!) {
 				repository(owner: $owner, name: $name) {
@@ -292,22 +320,49 @@ export class GithubService {
 			b${i}: ref(qualifiedName: "${b}") {
 				target {
 					... on Commit {
-						history(first: 1) {
+						history(first: ${number}) {
 							...CommitFragment
 						}
 					}
 				}
 			}`;
 		});
-		query += `	
+		if (!full) {
+			query += `	
+				}
 			}
+			fragment CommitFragment on CommitHistoryConnection {
+				totalCount
+				nodes {
+					oid
+				}
+			}`;
+		} else {
+			query += `	
+				}
+			}
+			fragment CommitFragment on CommitHistoryConnection {
+				totalCount
+				nodes {
+					oid
+					message
+					committedDate
+					author {
+						name
+						email
+						user {
+							id
+							login
+						}
+					}
+					additions
+					deletions
+				pageInfo {
+					hasNextPage
+					endCursor
+				}
+			}`
 		}
-		fragment CommitFragment on CommitHistoryConnection {
-			totalCount
-			nodes {
-				oid
-			}
-		}`;
 		return query;
 	}
 
@@ -330,29 +385,10 @@ export class GithubService {
 	/*
 		returns all commits from the repo specified by the id, optionally by author
 	*/
-	/*async getCommits(config: CommitConfig): Promise<Array<CommitFull>> {
-		let commitOptions: { per_page, page, author?} = { per_page: 100, page: 1 };
-		if (config.author) {
-			commitOptions.author = config.author;
-		}
-
-		if (!this.testDatabase.repo[config.repo]) {
-			throw new NotFoundException();
-		}
-
-		let repo = this.client.repo(this.testDatabase.repo[config.repo]);
-		let [commits, headers]: [commits: Array<CommitFull>, headers: any] = await repo.commitsAsync(commitOptions); //get first page
-
-		if (headers.link) { //if it has pagination
-			let parsedLink = this.parseGithubLink(headers.link);
-			for (let page = 2; page <= Math.min(parsedLink.last.page, 10); page++) {
-				commitOptions.page = page;
-				commits = commits.concat((await repo.commitsAsync(commitOptions))[0]); //join all commits together
-			}
-		}
-
-		return commits;
-	}*/
+	async getCommits(config: CommitConfig): Promise<Array<CommitFormatted>> {
+		let repos = await this.database.getAllRepos();
+		return Object.values((repos[config.repo].toObject() as RepoType).commits);
+	}
 
 	/*
 		parses the link header of github api requests

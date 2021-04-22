@@ -7,8 +7,8 @@ export class GithubController {
 
 	@Get("commits/:repo")
 	async commitsRepo(@Param() params) { //get commits and send it
-		//var rawCommits = await this.githubService.getCommits({repo: parseInt(params.repo)});
-		return; //this.githubService.formatCommits(rawCommits);
+		//var rawCommits = 
+		return await this.githubService.getCommits({repo: parseInt(params.repo)});
 	} //test http://localhost:3000/github/commits/2
 
 	@Get("commits/:repo/:user")

@@ -110,7 +110,7 @@ export class DashboardComponent implements OnInit {
 	}
 
 	getData(): Promise<CommitResponse> {
-		return this.backendApiService.getCommits("3");
+		return this.backendApiService.getCommits("2");
 	}
 
 	createGithubChartConfig(labels: ChartData["labels"], data: ChartDataSets["data"], label: string, title: string): ChartConfiguration {
