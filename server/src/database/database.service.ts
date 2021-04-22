@@ -4,6 +4,7 @@ import * as mongoose from 'mongoose';
 import { RepoModel } from "./database.model";
 import { CommitFormatted } from 'src/github/github.type';
 import { RepoType } from './database.type';
+import { Observable, Subscriber } from 'rxjs';
 
 const mongooseOptions: ConnectOptions = {
 	useNewUrlParser: true,
@@ -18,8 +19,11 @@ const mongooseOptions: ConnectOptions = {
 @Injectable()
 export class DatabaseService {
 	static initialized = false;
+	static readyNext: Subscriber<unknown>;
+	static ready;
 
 	constructor() {
+		DatabaseService.ready = new Observable((sub) => {DatabaseService.readyNext = sub});
 		if (!DatabaseService.initialized) {
 			DatabaseService.initialized = true;
 			mongoose.connect("mongodb://localhost:27017/dashboard", mongooseOptions).then(
@@ -46,6 +50,9 @@ export class DatabaseService {
 				{ name: "instructure/canvas-lms" }
 			);
 		}
+		console.log("Database initalized")
+		DatabaseService.readyNext.next();
+		DatabaseService.readyNext.complete();
 	}
 
 	async createRepo(repo: RepoType) {

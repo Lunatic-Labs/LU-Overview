@@ -32,19 +32,25 @@ export class GithubService {
 	constructor(private readonly database: DatabaseService) {
 		this.client = (githubToken ? github.client(githubToken) : github.client());
 
-		if(!GithubService.initialized) {
+		if (!GithubService.initialized) {
 			GithubService.initialized = true;
-			this.initalizeRepos();
+			DatabaseService.ready.subscribe({ next: (n) =>{
+				this.initializeRepos();
+			}});
 		}
 	}
 
-	async initalizeRepos() {
+	async initializeRepos() {
+		//console.log(DatabaseService.ready) }
+
 		let repos = await this.database.getAllRepos();
 
 		console.log(await this.database.getRepo("Lunatic-Labs/LU-Overview"));
 
+		console.log(repos);
+
 		repos.forEach(async repo => {
-			
+
 		});
 	}
 
