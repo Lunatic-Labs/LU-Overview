@@ -1,43 +1,175 @@
+.highcharts-figure, .highcharts-data-table table {
+  min-width: 310px;
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+#container {
+  height: 400px;
+}
+
+.highcharts-data-table table {
+font-family: Verdana, sans-serif;
+border-collapse: collapse;
+border: 1px solid #EBEBEB;
+margin: 10px auto;
+text-align: center;
+width: 100%;
+max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+
+
+.chart{
+    max-height: 700px;
+    max-width: 700px;
+}
+
+#myChart1{
+    max-height: 700px;
+    max-width: 700px;
+}
+
+#myChart2{
+    max-height: 800px;
+    max-width:  800px;
+}
+
+#myChart3{
+    max-height: 800px;
+    max-width: 800px;
+}
+
+
+body {
+  background-color: #dedede;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body.modal-open {
+  padding-right: 0 !important;
+}
+
+#sidebar {
+  padding-left: 0;
+}
+
+.card {
+  overflow: hidden;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.card-block .rotate {
+  z-index: 8;
+  float: right;
+  height: 100%;
+}
+
+.card-block .rotate i {
+  color: rgba(20, 20, 20, 0.15);
+  position: absolute;
+  left: 0;
+  left: auto;
+  right: -10px;
+  bottom: 0;
+  display: block;
+  -webkit-transform: rotate(-44deg);
+  -moz-transform: rotate(-44deg);
+  -o-transform: rotate(-44deg);
+  -ms-transform: rotate(-44deg);
+  transform: rotate(-44deg);
+}
+
+.sidebar {
+  z-index: 1000;
+  position: fixed;
+  top: 50px;
+  left: -50px;
+  width: 50px;
+  height: 100%;
+  overflow-y: auto;
+  background: #2A3F54;
+color: #ffffff;
+-webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.main {
+width: 100%;
+  position: relative;
+  padding-bottom:0px;
+}
+
 .dashboard {
-  padding-left: 150px;
+  padding-left: 50px;
 }
 
 .dashboard hr {
-  margin-top: 1.5rem;
-  margin-bottom: 0.9rem;
-  margin-left: 5rem;
-  margin-right: 3rem;
+  margin-top: 1.8rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   border: 0;
   border-top: 0.5px solid #260859;
 }
 
 .h1 {
-  padding-left: 80px;
-  padding-top: 30px;
+  padding-left: 180px;
+  padding-top: 33px;
+  margin-bottom: -10px;
   font-size: 40px;
+  color:rgb(0, 0, 0)
+}
+.text-uppercase {
   color:rgb(0, 0, 0)
 }
 
 .sidebar {
-  height: 100%;
-  width: 200px;
+  height: 200%;
+  width: 250px;
   margin-top: -113px;
   background-color: #260859;
   padding-top: 30px;
+  padding-left: 50px;
+
 }
 
 .sidebar a {
   padding: 6px 16px 16px;
   text-decoration: none;
   font-size: 20px;
-  color: #ffffffe1;
+  color: #FFF;
   display: block;
 }
 
 .sidebar h2 {
   padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 66px;
+  padding-bottom: 0px;
   font-size: 25px;
   color:rgb(244, 170, 0);
 }
@@ -49,8 +181,8 @@
 .sidebar hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   border: 0;
   border-top: 0.5px solid rgba(248, 245, 245, 0.377);
 }
@@ -63,4 +195,8 @@
   color: #ffffffe1;
   padding-left: 16px;
   font-size: 20px;
+}
+
+.icon {
+  margin-right: 15px;
 }

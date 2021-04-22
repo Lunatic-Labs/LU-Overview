@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { CommitConfig, GithubLink } from './github.interface';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CommitFull, CommitConfig, GithubLink, CommitFormatted } from './github.type';
 var github = require("octonode");
 
 @Injectable()
@@ -7,7 +7,9 @@ export class GithubService {
 	testDatabase = {
 		repo: {
 			1: "spencer012/Game-8",
-			2: "d-oliveros/nest"
+			2: "d-oliveros/nest",
+			3: "Lunatic-Labs/LU-Overview",
+			4: "Lunatic-Labs/Operations"
 		}
 	}
 
@@ -16,12 +18,16 @@ export class GithubService {
 	/*
 		returns all commits from the repo specified by the id, optionally by author
 	*/
-	async getCommits(config: CommitConfig): Promise<Array<object>> {
+	async getCommits(config: CommitConfig): Promise<Array<CommitFull>> {
 		let commitOptions: {per_page, page, author?} = { per_page: 100, page: 1 };
 		if (config.author) { 
 			commitOptions.author = config.author;
 		}
 		
+		if (!this.testDatabase.repo[config.repo]) {
+			throw new NotFoundException();
+		}
+
 		let repo = this.client.repo(this.testDatabase.repo[config.repo]);
 		let [commits, headers]: [commits: Array<any>, headers: any] = await repo.commitsAsync(commitOptions); //get first page
 		//console.log(responseData);
@@ -52,6 +58,31 @@ export class GithubService {
 		}
 		
 		return linksParsed;
+	}
+
+	/*
+		strip down commits to only the information we will need
+		takes an array of full commits and returns an array of formatted commits
+	*/
+	formatCommits(commits: Array<CommitFull>): Array<CommitFormatted> {
+		var formatted: Array<CommitFormatted> = [];
+
+		commits.forEach((commit) => {
+			formatted.push({
+				author: { //shorthand for if(author exists) {return author.name} else if(committer exists) {return committer.name}
+						  //it is this way because there is a possiblility for the authors and committors to be null
+					commitName: (commit.commit.author && commit.commit.author.name) || (commit.commit.committer && commit.commit.committer.name),
+					commmitEmail: (commit.commit.author && commit.commit.author.email)  || (commit.commit.committer && commit.commit.committer.email),
+					authorLogin: (commit.author && commit.author.login) || (commit.committer && commit.committer.login),
+					authorId: (commit.author && commit.author.id) || (commit.committer && commit.committer.id)
+				},
+				message: commit.commit.message,
+				comment_count: commit.commit.comment_count,
+				date: commit.commit.author.date || commit.commit.committer.date
+			})
+		});
+
+		return formatted;
 	}
 }
 
