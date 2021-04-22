@@ -76,3 +76,42 @@ export interface ParentsEntity {
 	html_url: string;
 }
 // end of generated
+
+export interface CommitsFull {
+	repository: Repository;
+}
+export interface Repository {
+	[value: string]: Branch;
+}
+export interface Branch {
+	target: Target;
+}
+export interface Target {
+	history: History;
+}
+export interface History {
+	totalCount: number;
+	nodes?: (NodesEntity)[] | null;
+	pageInfo: PageInfo;
+}
+export interface NodesEntity {
+	oid: string;
+	message: string;
+	committedDate: string;
+	author: Author;
+	additions: number;
+	deletions: number;
+}
+export interface Author {
+	name: string;
+	email: string;
+	user: User;
+}
+export interface User {
+	id: string,
+	login: string
+}
+export interface PageInfo {
+	hasNextPage: boolean;
+	endCursor: string;
+}

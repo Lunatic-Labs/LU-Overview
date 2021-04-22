@@ -2,12 +2,14 @@
 export interface CommitFormatted {
 	author: Author;
 	message: string;
-	comment_count: number;
 	date: string;
+	oid: string;
+	additions: number;
+	deletions: number;
 }
 export interface Author {
-	commitName: string | null;
-	commmitEmail: string | null;
-	authorLogin: string | null;
-	authorId: number | null;
+	name: string | null;
+	email: string | null;
+	login: string | null;
+	id: string | null;
 }

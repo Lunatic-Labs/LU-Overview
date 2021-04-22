@@ -4,6 +4,7 @@ export interface CommitFormatted {
 	message: string;
 	comment_count: number;
 	date: string;
+	sha: string;
 }
 export interface Author {
 	commitName: string | null;
