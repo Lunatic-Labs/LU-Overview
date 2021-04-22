@@ -1,7 +1,5 @@
 import * as mongoose from "mongoose";
 
-export const myMongoose = mongoose;
-
 const UserSchema = new mongoose.Schema({
 	email: String,
 	firstName: String,
@@ -12,6 +10,7 @@ const UserSchema = new mongoose.Schema({
 	slackUser: String
 });
 
+/*
 const CommmitSchema = new mongoose.Schema({
 	author: Object,
 	message: String,
@@ -19,14 +18,15 @@ const CommmitSchema = new mongoose.Schema({
 	date: String,
 	_id: String
 });
-CommmitSchema.virtual("sha") //use the sha as the object id
+CommmitSchema.virtual("oid") //use the oid as the object id
 	.get(function () { return this._id; })
 	.set(function (val) { this._id = val; });
+CommmitSchema.set('toObject', { virtuals: true });*/
 
 const RepoSchema = new mongoose.Schema({
 	name: String,
 	branches: Object,
-	commits: [CommmitSchema]
+	commits: Object
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

@@ -65,7 +65,7 @@ export class DatabaseService {
 		return (await RepoModel.findOne({ name: name }).exec());
 	}
 	async getAllRepos() {
-		return (await RepoModel.find());
+		return (await RepoModel.find().exec());
 	}
 	async repoExists(name: string) {
 		return (await RepoModel.exists({ name: name }));
