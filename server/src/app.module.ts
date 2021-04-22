@@ -5,9 +5,11 @@ import { AppService } from './app.service';
 import { GithubModule } from './github/github.module';
 import { PassportModule } from './passport/passport.module';
 import { passportMiddleware } from './passport/passport.middleware';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-	imports: [GithubModule, PassportModule],
+	imports: [GithubModule, PassportModule, AuthModule, UsersModule],
 	controllers: [AppController],
 	providers: [AppService],
 })
