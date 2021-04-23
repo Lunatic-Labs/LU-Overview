@@ -387,6 +387,10 @@ export class GithubService {
 	*/
 	async getCommits(config: CommitConfig): Promise<Array<CommitFormatted>> {
 		let repos = await this.database.getAllRepos();
+		console.log("---------------------------------------")
+		repos.forEach((v, i) => {
+			console.log(i + ": " + (v.toObject() as RepoType).name);
+		})
 		return Object.values((repos[config.repo].toObject() as RepoType).commits);
 	}
 

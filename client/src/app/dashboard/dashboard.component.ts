@@ -4,6 +4,7 @@ import { Observable, Subscriber } from 'rxjs';
 import { BackendApiService } from '../backend-connection/backend-api.service';
 import { CommitResponse } from '../backend-connection/backend-api.type';
 import { days, months } from "../../common/constants/time.type";
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
 	};
 	totalCommits = 0;
 
-	constructor(private backendApiService: BackendApiService) { }
+	constructor(private backendApiService: BackendApiService, private route: ActivatedRoute) { }
 
 
 	async ngOnInit(): Promise<void> {
@@ -110,7 +111,8 @@ export class DashboardComponent implements OnInit {
 	}
 
 	getData(): Promise<CommitResponse> {
-		return this.backendApiService.getCommits("2");
+		console.log(this.route.snapshot.paramMap.get('id'));
+		return this.backendApiService.getCommits(this.route.snapshot.paramMap.get('id') || "2");
 	}
 
 	createGithubChartConfig(labels: ChartData["labels"], data: ChartDataSets["data"], label: string, title: string): ChartConfiguration {

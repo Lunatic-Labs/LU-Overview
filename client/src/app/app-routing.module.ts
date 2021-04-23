@@ -8,6 +8,7 @@ const routes: Routes =
 	[
 		{ path: '', component: DashboardComponent },
 		{ path: 'dashboard', component: DashboardComponent },
+		{ path: 'dashboard/:id', component: DashboardComponent },
 		{ path: 'login', component: LoginComponent },
 		{ path: 'settings', component: SettingsComponent }
 	];

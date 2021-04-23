@@ -47,6 +47,7 @@ export class DatabaseService {
 				{ name: "Lunatic-Labs/LU-Overview" },
 				{ name: "Lunatic-Labs/Operations" },
 				{ name: "Lunatic-Labs/Project-Aim" },
+				{ name: "Lunatic-Labs/AsylumStudios_2100" },
 				{ name: "instructure/canvas-lms" }
 			);
 		}
