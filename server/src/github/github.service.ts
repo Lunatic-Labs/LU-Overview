@@ -10,7 +10,7 @@ var githubToken: string | null;
 try {
 	githubToken = require("../secrets/tokens").githubToken;
 } catch (e) {
-	githubToken = null
+	githubToken = null //without a token you will not be able to access private repos
 	console.error("Github token was not supplied, reverting to public api");
 }
 
@@ -25,7 +25,7 @@ export class GithubService {
 
 		if (!GithubService.initialized) {
 			GithubService.initialized = true;
-			DatabaseService.ready.subscribe({
+			DatabaseService.ready.subscribe({ //only run this function after the database is initialized
 				next: (n) => {
 					this.initializeRepos();
 				}
@@ -50,6 +50,7 @@ export class GithubService {
 
 	async initializeRepo(name: string) {
 		let nameSplit = name.split("/");
+		// this gets all the branches in a repo
 		let rawBranches = await this.client(`
 				query($owner:String!, $name:String!, $branchCursor: String!) {
 					repository(owner: $owner, name: $name) {
@@ -74,7 +75,7 @@ export class GithubService {
 		let main = null;
 		rawBranches.repository.refs.edges.forEach(e => {
 			let b = e.node.name;
-			if ((b == "main" || b == "master") && main == null) {
+			if ((b == "main" || b == "master") && main == null) { //is the root branch master or main?
 				main = b;
 			}
 			else {
@@ -174,7 +175,7 @@ export class GithubService {
 		let differentOid = [];
 
 		let branchesRaw = Object.values(latestCommitsRaw.repository);
-		for (let i = 0; i < branchesRaw.length; i++) {
+		for (let i = 0; i < branchesRaw.length; i++) { //record any differing oids
 			let commitNodes = branchesRaw[i].target.history.nodes;
 			if (!commitNodes) {
 				if (savedBranches[branches[i]] != "") {
@@ -193,6 +194,7 @@ export class GithubService {
 		}
 	}
 
+	// the query comes from https://stackoverflow.com/questions/9179828/github-api-retrieve-all-commits-for-all-branches-for-a-repo
 	constructInitalQuery(main: string, mainNum: number, branches: Array<string>, branchNum: number): string {
 		let query =
 			`query ($owner: String!, $name: String!) {

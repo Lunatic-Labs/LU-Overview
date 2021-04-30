@@ -52,7 +52,8 @@ export class DatabaseService {
 			);
 		}
 		console.log("Database initalized")
-		DatabaseService.readyNext.next();
+		
+		DatabaseService.readyNext.next(); //this is so any initialization from other services that need the database can run after the database is initialized
 		DatabaseService.readyNext.complete();
 	}
 
