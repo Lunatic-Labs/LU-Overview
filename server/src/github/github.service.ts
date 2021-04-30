@@ -5,7 +5,6 @@ import { graphql } from "@octokit/graphql";
 import { RepoType } from 'src/database/database.type';
 import { LeanDocument, Document } from 'mongoose';
 
-var github = require("octonode");
 var githubToken: string | null;
 
 try {
@@ -18,17 +17,6 @@ try {
 @Injectable()
 export class GithubService {
 	static initialized = false;
-
-	testDatabase = {
-		repo: {
-			1: "spencer012/Game-8",
-			2: "d-oliveros/nest",
-			3: "Lunatic-Labs/LU-Overview",
-			4: "Lunatic-Labs/Operations",
-			5: "Lunatic-Labs/Project-Aim",
-			6: "instructure/canvas-lms"
-		}
-	}
 
 	client: any;
 
