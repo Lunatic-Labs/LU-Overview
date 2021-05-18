@@ -47,11 +47,13 @@ export class DatabaseService {
 				{ name: "Lunatic-Labs/LU-Overview" },
 				{ name: "Lunatic-Labs/Operations" },
 				{ name: "Lunatic-Labs/Project-Aim" },
+				{ name: "Lunatic-Labs/AsylumStudios_2100" },
 				{ name: "instructure/canvas-lms" }
 			);
 		}
 		console.log("Database initalized")
-		DatabaseService.readyNext.next();
+		
+		DatabaseService.readyNext.next(); //this is so any initialization from other services that need the database can run after the database is initialized
 		DatabaseService.readyNext.complete();
 	}
 

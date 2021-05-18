@@ -11,7 +11,7 @@ export class GithubController {
 		return await this.githubService.getCommits({repo: parseInt(params.repo)});
 	} //test http://localhost:3000/github/commits/2
 
-	@Get("commits/:repo/:user")
+	@Get("commits/:repo/:user") //do we need this?
 	async commitsRepoUser(@Param() params) { //get commits and send it filtered to a certain user
 		//var rawCommits = await this.githubService.getCommits({repo: parseInt(params.repo), author: params.user});
 		return; //this.githubService.formatCommits(rawCommits);

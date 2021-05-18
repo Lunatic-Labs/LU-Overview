@@ -17,32 +17,23 @@ This project uses Angular for the frontend and a Nestjs server for the backend t
 - [Angular Material](https://material.angular.io/)
 - [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
-## Team Members
-Name|Role
-----|----
-G Diaz|Architect
-Nikki|...
-Santos|...
-Leroy|...
-Min|...
-Spencer|...
-
 # Installation
 
 1. Follow the instructions to install an node version manager for [Windows](https://github.com/coreybutler/nvm-windows) or [Mac/Linux](https://github.com/nvm-sh/nvm).
-2. Run 
+2. [Install mongodb](https://docs.mongodb.com/manual/administration/install-community/)
+3. Run 
 	```sh
 	nvm install 14.15.4
 	nvm use 14.15.4
 	``` 
 	Nvm for windows will not automatically switch versions
-3. Run 
+4. Run 
 	```sh
 	npm install -g @nestjs/cli
 	npm install -g @angular/cli
 	```
-4. Clone the project
-5. Navigate to the `server/` folder in the project and run `npm install`, then do the same for the `client/` folder.
+5. Clone the project
+6. Navigate to the `server/` folder in the project and run `npm install`, then do the same for the `client/` folder.
 
 # Running
 
@@ -71,13 +62,3 @@ Nest: Navigate to `server/`, then run `npm run test`
 Returns all commits from the repo specified by the id, optionally by author, limited to 1000.
 
 ## Client
-
-### Backend Api
-
-##### getCommits(repo, user?, errorFunction?)
-
-Get commits from a repo, limited to 1000, with an optional user filter, and an error callback function.
-
-- repo: Name/Id(decide) of repo
-- user?: Name of a user to filter by
-- errorFunction?: A function that can take a HttpErrorResponse and return a default value, returning nothing throws an error instead

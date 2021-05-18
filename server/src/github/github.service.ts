@@ -5,30 +5,18 @@ import { graphql } from "@octokit/graphql";
 import { RepoType } from 'src/database/database.type';
 import { LeanDocument, Document } from 'mongoose';
 
-var github = require("octonode");
 var githubToken: string | null;
 
 try {
 	githubToken = require("../secrets/tokens").githubToken;
 } catch (e) {
-	githubToken = null
+	githubToken = null //without a token you will not be able to access private repos
 	console.error("Github token was not supplied, reverting to public api");
 }
 
 @Injectable()
 export class GithubService {
 	static initialized = false;
-
-	testDatabase = {
-		repo: {
-			1: "spencer012/Game-8",
-			2: "d-oliveros/nest",
-			3: "Lunatic-Labs/LU-Overview",
-			4: "Lunatic-Labs/Operations",
-			5: "Lunatic-Labs/Project-Aim",
-			6: "instructure/canvas-lms"
-		}
-	}
 
 	client: any;
 
@@ -37,7 +25,7 @@ export class GithubService {
 
 		if (!GithubService.initialized) {
 			GithubService.initialized = true;
-			DatabaseService.ready.subscribe({
+			DatabaseService.ready.subscribe({ //only run this function after the database is initialized
 				next: (n) => {
 					this.initializeRepos();
 				}
@@ -62,6 +50,7 @@ export class GithubService {
 
 	async initializeRepo(name: string) {
 		let nameSplit = name.split("/");
+		// this gets all the branches in a repo
 		let rawBranches = await this.client(`
 				query($owner:String!, $name:String!, $branchCursor: String!) {
 					repository(owner: $owner, name: $name) {
@@ -86,7 +75,7 @@ export class GithubService {
 		let main = null;
 		rawBranches.repository.refs.edges.forEach(e => {
 			let b = e.node.name;
-			if ((b == "main" || b == "master") && main == null) {
+			if ((b == "main" || b == "master") && main == null) { //is the root branch master or main?
 				main = b;
 			}
 			else {
@@ -186,7 +175,7 @@ export class GithubService {
 		let differentOid = [];
 
 		let branchesRaw = Object.values(latestCommitsRaw.repository);
-		for (let i = 0; i < branchesRaw.length; i++) {
+		for (let i = 0; i < branchesRaw.length; i++) { //record any differing oids
 			let commitNodes = branchesRaw[i].target.history.nodes;
 			if (!commitNodes) {
 				if (savedBranches[branches[i]] != "") {
@@ -205,6 +194,7 @@ export class GithubService {
 		}
 	}
 
+	// the query comes from https://stackoverflow.com/questions/9179828/github-api-retrieve-all-commits-for-all-branches-for-a-repo
 	constructInitalQuery(main: string, mainNum: number, branches: Array<string>, branchNum: number): string {
 		let query =
 			`query ($owner: String!, $name: String!) {
@@ -387,6 +377,10 @@ export class GithubService {
 	*/
 	async getCommits(config: CommitConfig): Promise<Array<CommitFormatted>> {
 		let repos = await this.database.getAllRepos();
+		console.log("---------------------------------------")
+		repos.forEach((v, i) => {
+			console.log(i + ": " + (v.toObject() as RepoType).name);
+		})
 		return Object.values((repos[config.repo].toObject() as RepoType).commits);
 	}
 
